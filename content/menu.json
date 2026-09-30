@@ -1,0 +1,37 @@
+{
+  "_comment": "The menu. Prices are in dollars. 'daily' items are baked every open day; others list the days they're available.",
+  "sections": [
+    {
+      "id": "bread",
+      "title": "Bread",
+      "note": "Naturally leavened, fermented 36 hours. Sliced on request.",
+      "items": [
+        { "name": "Country Sourdough", "description": "Our house loaf. Blistered crust, open crumb, a little tang.", "price": 9, "daily": true },
+        { "name": "Seeded Rye", "description": "Forty percent whole rye with sunflower, flax, and toasted sesame.", "price": 10, "days": ["Wednesday", "Saturday"] },
+        { "name": "Juniper Levain", "description": "Crushed juniper and orange zest. Our namesake, and the reason regulars come on Fridays.", "price": 11, "days": ["Friday"] },
+        { "name": "Baguette", "description": "Crackly, thin-crusted, gone by noon.", "price": 4.5, "daily": true }
+      ]
+    },
+    {
+      "id": "pastry",
+      "title": "Pastry",
+      "note": "Laminated by hand with cultured butter.",
+      "items": [
+        { "name": "Butter Croissant", "description": "Three days from dough to case. Flaky all the way through.", "price": 4.75, "daily": true },
+        { "name": "Cardamom Bun", "description": "Swedish-style knot, fresh-ground cardamom, pearl sugar.", "price": 5, "daily": true },
+        { "name": "Seasonal Fruit Danish", "description": "Whatever the orchard down the road has this week.", "price": 5.5, "daily": true },
+        { "name": "Chocolate Rye Cookie", "description": "Dark chocolate, rye flour, flaky salt. Chewy in the middle.", "price": 3.5, "daily": true }
+      ]
+    },
+    {
+      "id": "coffee",
+      "title": "Coffee & tea",
+      "note": "Beans roasted locally. Oat milk at no charge.",
+      "items": [
+        { "name": "Drip coffee", "description": "Bottomless if you're staying.", "price": 3 },
+        { "name": "Cortado", "description": "Equal parts espresso and steamed milk.", "price": 4.25 },
+        { "name": "Chai", "description": "House-spiced, not too sweet.", "price": 4.5 }
+      ]
+    }
+  ]
+}

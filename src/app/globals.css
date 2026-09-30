@@ -1,0 +1,93 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Design tokens. DESIGN.md explains each one. Change a color here and the whole site follows. */
+@theme {
+  --color-flour: #f6f0e5;       /* page background: warm cream */
+  --color-crumb: #ece2cf;       /* alternate band / card surface */
+  --color-crust: #2a1c13;       /* primary ink: deep brown-black */
+  --color-rye: #7b4a2b;         /* secondary accent: rye brown */
+  --color-juniper: #2d4a3c;     /* primary action: deep juniper green */
+  --color-juniper-ink: #f3efe6; /* text on juniper */
+  --color-ember: #c4622d;       /* small highlights: open-now dot, markers */
+  --color-muted: #6e5d50;       /* secondary text */
+  --color-line: #d9ccb6;        /* hairlines and borders */
+
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1.25rem;
+}
+
+@layer base {
+  html {
+    background: var(--color-flour);
+    color: var(--color-crust);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.015em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--color-juniper); color: var(--color-juniper-ink); }
+  :focus-visible { outline: 2px solid var(--color-ember); outline-offset: 3px; border-radius: 4px; }
+}
+
+@layer components {
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-rye);
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.8rem 1.35rem;
+    font-weight: 600;
+    font-size: 0.98rem;
+    transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--color-juniper); color: var(--color-juniper-ink); }
+  .btn-primary:hover { background: #233b30; }
+  .btn-ghost { border: 1.5px solid var(--color-crust); color: var(--color-crust); }
+  .btn-ghost:hover { background: var(--color-crust); color: var(--color-flour); }
+
+  /* Menu rows with dotted leaders between name and price */
+  .leader {
+    flex: 1;
+    border-bottom: 1.5px dotted var(--color-line);
+    margin: 0 0.6rem 0.4rem;
+  }
+
+  /* Long-form text from markdown */
+  .prose-bakery {
+    --tw-prose-body: var(--color-crust);
+    --tw-prose-headings: var(--color-crust);
+    --tw-prose-links: var(--color-juniper);
+    --tw-prose-bold: var(--color-crust);
+    --tw-prose-bullets: var(--color-rye);
+    --tw-prose-quotes: var(--color-rye);
+  }
+  .prose-bakery h2 { font-family: var(--font-display); font-weight: 500; }
+  .prose-bakery a { text-underline-offset: 3px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

@@ -1,0 +1,40 @@
+{
+  "_comment": "Single source of truth for business facts. Every page, the footer, and the Google structured data read from this file. Change a fact here and it changes everywhere.",
+  "name": "Juniper & Rye Bakehouse",
+  "shortName": "Juniper & Rye",
+  "tagline": "Slow bread, early mornings.",
+  "description": "A neighborhood bakery making naturally leavened bread, laminated pastry, and one very good cardamom bun, baked fresh every morning in Harbor Falls.",
+  "fictional": true,
+  "url": "https://agent-site-kit.vercel.app",
+  "phone": "(555) 014-2290",
+  "email": "hello@example.com",
+  "address": {
+    "street": "418 Mill Street",
+    "city": "Harbor Falls",
+    "region": "VA",
+    "postalCode": "20100",
+    "country": "US"
+  },
+  "timezone": "America/New_York",
+  "hours": [
+    { "day": "Monday", "closed": true },
+    { "day": "Tuesday", "open": "07:00", "close": "15:00" },
+    { "day": "Wednesday", "open": "07:00", "close": "15:00" },
+    { "day": "Thursday", "open": "07:00", "close": "15:00" },
+    { "day": "Friday", "open": "07:00", "close": "15:00" },
+    { "day": "Saturday", "open": "07:00", "close": "14:00" },
+    { "day": "Sunday", "open": "08:00", "close": "13:00" }
+  ],
+  "announcement": {
+    "show": true,
+    "text": "Holiday pre-orders open November 1. Stollen, panettone, and the big rye."
+  },
+  "social": {
+    "instagram": "https://instagram.com/"
+  },
+  "seo": {
+    "market": "Virginia,United States",
+    "language": "English",
+    "seedKeywords": ["sourdough bread", "bakery near me", "croissants", "cardamom buns", "holiday bread pre-order"]
+  }
+}

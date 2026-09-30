@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run check)",
+      "Bash(npm run build)",
+      "Bash(npm run dev)",
+      "Bash(npm run care:status)",
+      "Bash(npm run care:propose:*)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)"
+    ],
+    "ask": [
+      "Bash(npm run care:publish:*)",
+      "Bash(npm run care:undo)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(gh pr merge:*)"
+    ]
+  }
+}

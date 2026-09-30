@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "dataforseo": {
+      "command": "npx",
+      "args": ["-y", "dataforseo-mcp-server@latest"],
+      "env": {
+        "DATAFORSEO_LOGIN": "${DATAFORSEO_LOGIN}",
+        "DATAFORSEO_PASSWORD": "${DATAFORSEO_PASSWORD}"
+      }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest", "--headless"]
+    }
+  }
+}

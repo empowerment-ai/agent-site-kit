@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Site Builder · agent-site-kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f4f1ea; --panel: #fffdf8; --ink: #1f1a16; --muted: #756a60; --line: #e3dccf;
+    --accent: #2d4a3c; --accent-ink: #f3efe6; --tool: #efe9dd; --warn: #b4532a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { font: 15px/1.5 "Hanken Grotesk", system-ui, sans-serif; background: var(--bg); color: var(--ink); display: grid; grid-template-columns: minmax(340px, 420px) 1fr; }
+  aside { display: flex; flex-direction: column; border-right: 1px solid var(--line); background: var(--panel); min-height: 0; }
+  header { padding: 16px 18px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; }
+  header b { font-weight: 600; letter-spacing: -0.01em; }
+  header small { color: var(--muted); display: block; font-size: 12px; }
+  .ghost { background: none; border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; font: inherit; font-size: 12.5px; cursor: pointer; color: var(--ink); }
+  .ghost:hover { background: var(--tool); }
+  #log { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+  .msg { padding: 10px 13px; border-radius: 14px; max-width: 92%; white-space: pre-wrap; }
+  .user { align-self: flex-end; background: var(--accent); color: var(--accent-ink); border-bottom-right-radius: 4px; }
+  .agent { align-self: flex-start; background: var(--tool); border-bottom-left-radius: 4px; }
+  .tool { align-self: flex-start; font: 12.5px/1.4 "JetBrains Mono", monospace; color: var(--muted); display: flex; gap: 8px; align-items: center; padding: 2px 4px; }
+  .tool::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #9fb3a7; flex: none; }
+  .tool.live::before { background: var(--warn); animation: pulse 1s infinite; }
+  .meta { align-self: center; font-size: 12px; color: var(--muted); }
+  .err { align-self: stretch; background: #fbe9e1; color: #7a2d12; border-radius: 10px; padding: 8px 12px; font-size: 13.5px; }
+  @keyframes pulse { 50% { opacity: .35; } }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 18px 10px; }
+  .chip { border: 1px dashed var(--line); background: none; border-radius: 999px; padding: 5px 10px; font: inherit; font-size: 12.5px; color: var(--muted); cursor: pointer; }
+  .chip:hover { color: var(--ink); border-style: solid; }
+  form { border-top: 1px solid var(--line); padding: 12px; display: flex; gap: 8px; }
+  textarea { flex: 1; resize: none; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; font: inherit; min-height: 46px; max-height: 160px; background: #fff; }
+  textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  button.send { background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 12px; padding: 0 16px; font: inherit; font-weight: 600; cursor: pointer; }
+  button.send:disabled { opacity: .5; cursor: wait; }
+  #history { border-top: 1px solid var(--line); padding: 10px 18px 14px; font-size: 12.5px; max-height: 150px; overflow-y: auto; }
+  #history h3 { margin: 0 0 6px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+  #history li { list-style: none; display: flex; gap: 8px; color: var(--muted); padding: 2px 0; }
+  #history ul { margin: 0; padding: 0; }
+  #history code { font-family: "JetBrains Mono", monospace; color: var(--ink); }
+  main { display: flex; flex-direction: column; min-width: 0; }
+  .bar { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--panel); }
+  .url { flex: 1; font: 12.5px "JetBrains Mono", monospace; color: var(--muted); background: var(--bg); border-radius: 999px; padding: 6px 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .frame-wrap { flex: 1; display: flex; justify-content: center; padding: 14px; min-height: 0; }
+  iframe { width: 100%; height: 100%; border: 1px solid var(--line); border-radius: 12px; background: #fff; transition: width .25s ease; }
+  .phone iframe { width: 390px; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+  .seg button { border: 0; background: none; padding: 5px 11px; font: inherit; font-size: 12.5px; cursor: pointer; color: var(--muted); }
+  .seg button.on { background: var(--ink); color: var(--panel); }
+  @media (max-width: 900px) { body { grid-template-columns: 1fr; grid-template-rows: 55vh 45vh; } aside { border-right: 0; border-bottom: 1px solid var(--line); } }
+</style>
+</head>
+<body>
+<aside>
+  <header>
+    <div><b>Site Builder</b><small>Claude Agent SDK · your files · your git</small></div>
+    <button class="ghost" id="new" title="Start a fresh conversation">New chat</button>
+  </header>
+  <div id="log" aria-live="polite">
+    <div class="msg agent">Hi! Tell me what to change on the site and I'll do it while you watch the preview. Every change is saved as a checkpoint you can undo.</div>
+  </div>
+  <div class="chips" id="chips">
+    <button class="chip">Change Saturday hours to 8am–1pm</button>
+    <button class="chip">Add a holiday pre-order section to the menu page</button>
+    <button class="chip">Write a journal post about our cardamom buns</button>
+    <button class="chip">Make the home page hero feel more premium</button>
+  </div>
+  <form id="f">
+    <textarea id="q" placeholder="Describe a change…" rows="1"></textarea>
+    <button class="send" id="send">Send</button>
+  </form>
+  <div id="history">
+    <h3>Checkpoints <button class="ghost" id="undo">Undo last</button></h3>
+    <ul id="hist"></ul>
+  </div>
+</aside>
+<main>
+  <div class="bar">
+    <div class="seg"><button class="on" data-w="desktop">Desktop</button><button data-w="phone">Phone</button></div>
+    <div class="url" id="url">__PREVIEW_URL__</div>
+    <button class="ghost" id="reload">Reload</button>
+  </div>
+  <div class="frame-wrap" id="wrap"><iframe id="preview" src="__PREVIEW_URL__" title="Live preview of the website"></iframe></div>
+</main>
+<script>
+  const $ = (s) => document.querySelector(s);
+  const log = $("#log"), q = $("#q"), send = $("#send"), frame = $("#preview");
+  const add = (cls, text) => { const d = document.createElement("div"); d.className = cls; d.textContent = text; log.append(d); log.scrollTop = log.scrollHeight; return d; };
+  let refreshTimer;
+  const refresh = (delay = 900) => { clearTimeout(refreshTimer); refreshTimer = setTimeout(() => { frame.src = frame.src; }, delay); };
+
+  function renderHistory(items) {
+    $("#hist").innerHTML = "";
+    for (const h of items.slice(0, 8)) {
+      const li = document.createElement("li");
+      li.innerHTML = `<code></code><span></span>`;
+      li.querySelector("code").textContent = h.sha;
+      li.querySelector("span").textContent = `${h.subject.replace(/^builder: /, "")} · ${h.when}`;
+      $("#hist").append(li);
+    }
+  }
+  fetch("/api/history").then((r) => r.json()).then(renderHistory);
+
+  async function ask(message) {
+    add("msg user", message);
+    send.disabled = true; q.value = "";
+    let live = null;
+    const res = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message }) });
+    if (!res.ok) { add("err", (await res.json()).error); send.disabled = false; return; }
+    const reader = res.body.getReader(); const dec = new TextDecoder(); let buf = "";
+    for (;;) {
+      const { value, done } = await reader.read(); if (done) break;
+      buf += dec.decode(value, { stream: true });
+      const parts = buf.split("\n\n"); buf = parts.pop();
+      for (const p of parts) {
+        if (!p.startsWith("data: ")) continue;
+        const e = JSON.parse(p.slice(6));
+        if (e.type === "tool") { live?.classList.remove("live"); live = add("tool live", e.label); }
+        if (e.type === "text") { live?.classList.remove("live"); add("msg agent", e.text); }
+        if (e.type === "refresh") refresh();
+        if (e.type === "done") {
+          live?.classList.remove("live");
+          if (!e.ok) add("err", e.error || "Something went wrong.");
+          const bits = [`${e.seconds ?? "?"}s`];
+          if (typeof e.cost === "number") bits.push(`$${e.cost.toFixed(2)}`);
+          if (e.checkpoint) bits.push(`checkpoint ${e.checkpoint}`);
+          add("meta", bits.join(" · "));
+          if (e.history) renderHistory(e.history);
+          refresh(300);
+        }
+      }
+    }
+    send.disabled = false; q.focus();
+  }
+
+  $("#f").addEventListener("submit", (ev) => { ev.preventDefault(); if (q.value.trim() && !send.disabled) ask(q.value.trim()); });
+  q.addEventListener("keydown", (ev) => { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); $("#f").requestSubmit(); } });
+  $("#chips").addEventListener("click", (ev) => { if (ev.target.classList.contains("chip")) { q.value = ev.target.textContent; q.focus(); } });
+  $("#reload").addEventListener("click", () => refresh(0));
+  $("#new").addEventListener("click", async () => { await fetch("/api/new", { method: "POST" }); add("meta", "New conversation started"); });
+  $("#undo").addEventListener("click", async () => {
+    const r = await fetch("/api/undo", { method: "POST" }); const j = await r.json();
+    if (!r.ok) add("err", j.error); else { add("meta", "Undid the last change"); renderHistory(j.history); refresh(300); }
+  });
+  document.querySelectorAll(".seg button").forEach((b) => b.addEventListener("click", () => {
+    document.querySelectorAll(".seg button").forEach((x) => x.classList.toggle("on", x === b));
+    $("#wrap").classList.toggle("phone", b.dataset.w === "phone");
+  }));
+</script>
+</body>
+</html>

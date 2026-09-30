@@ -1,0 +1,10 @@
+{
+  "_comment": "Permanent (301) redirects from old URLs, e.g. from a WordPress site you're leaving. The build fails if a destination page doesn't exist.",
+  "redirects": [
+    { "from": "/our-menu-2", "to": "/menu" },
+    { "from": "/about-us", "to": "/about" },
+    { "from": "/contact-us", "to": "/visit" },
+    { "from": "/elementor-1924", "to": "/" },
+    { "from": "/blog", "to": "/journal" }
+  ]
+}
