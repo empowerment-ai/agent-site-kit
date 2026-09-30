@@ -2,7 +2,7 @@
   "name": "agent-site-kit-builder",
   "version": "1.0.0",
   "private": true,
-  "description": "A Lovable-style chat + live preview for this site, in about 250 lines, powered by the Claude Agent SDK.",
+  "description": "A Lovable-style chat + live preview for this site, in one ~180-line server file, powered by the Claude Agent SDK.",
   "type": "module",
   "scripts": {
     "start": "node server.mjs"

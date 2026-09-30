@@ -26,7 +26,7 @@ This is the companion repo to the Empowerment AI two-part video series:
 | `scripts/check-content.mjs` | **Guardrails** that run before every build. A fake review with no source, a phone number that doesn't match, a redirect to a missing page, or a placeholder left in all fail the build. |
 | `skills/` | Five [Agent Skills](https://agentskills.io) (`SKILL.md` recipes). They work in **Claude Code** through `.claude/skills` and in **Hermes Agent** by installing from this repo. |
 | `.mcp.json` | MCP servers: **DataForSEO** (real keyword data) and **Playwright** (so the agent can screenshot its own work). |
-| `builder/` | **A Lovable-style builder in about 250 lines:** chat on the left, live preview on the right, git checkpoints with undo. Powered by the Claude Agent SDK. |
+| `builder/` | **A Lovable-style builder in one ~180-line file** (plus a small web page): chat on the left, live preview on the right, git checkpoints with undo. Powered by the Claude Agent SDK. |
 | `scripts/site-care/` | The **preview → owner says yes → publish** loop an agent uses to maintain the live site. The agent edits files; these scripts do the git and publishing. |
 | `agents/hermes/` | How to give a non-technical owner a Hermes agent on Telegram that runs the site. |
 | `docs/` | [How Lovable-style builders actually work](docs/how-lovable-works.md), and [what it all costs](docs/costs.md). |

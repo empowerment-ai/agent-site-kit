@@ -1,4 +1,4 @@
-# The builder: Lovable in about 250 lines
+# The builder: Lovable in one ~180-line file
 
 Lovable, Bolt, v0, and the 10-hour "build your own Lovable" tutorials all come down to
 the same loop:
