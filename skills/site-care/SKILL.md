@@ -1,6 +1,10 @@
 ---
 name: site-care
 description: Safely change the live website for a non-technical owner. Edit the content files, open a preview, send the owner the link, and publish only after they say yes. Use for any request to change the live site, like "change our hours", "add a special", "post this photo", "fix the typo on the menu", "undo that", or "what's pending?".
+required_environment_variables:
+  - name: GITHUB_TOKEN
+    prompt: Fine-grained GitHub token for the website repository
+    help: "GitHub → Settings → Developer settings → Fine-grained tokens. Only this repo. Contents and Pull requests: read/write. Deployments: read."
 ---
 
 # Site care: the owner's change loop

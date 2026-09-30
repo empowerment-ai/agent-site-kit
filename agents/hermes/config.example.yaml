@@ -1,0 +1,30 @@
+# Snippets to merge into ~/.hermes/config.yaml. This is not a complete config;
+# run `hermes setup` first, then add what you need from here.
+
+skills:
+  # Load this repo's skills directly (updates arrive with `git pull` in ~/sites/site)
+  external_dirs:
+    - ~/sites/site/skills
+
+terminal:
+  # Hermes hides environment variables from commands by default. The site-care
+  # scripts need the GitHub token (the site-care skill also declares it).
+  env_passthrough:
+    - GITHUB_TOKEN
+
+approvals:
+  mode: smart            # ask in chat before commands Hermes classifies as dangerous
+  cron_mode: deny        # scheduled jobs can't run dangerous commands, so the checkup only reports
+
+# DataForSEO for the seo-checkup skill. Hermes only passes the env you list here to
+# an MCP server. This file lives only on your server; never commit real values.
+mcp_servers:
+  dataforseo:
+    command: npx
+    args: ["-y", "dataforseo-mcp-server@latest"]
+    env:
+      DATAFORSEO_LOGIN: "your-dataforseo-login"
+      DATAFORSEO_PASSWORD: "your-dataforseo-api-password"
+    tools:
+      # Keep the agent to the read-only research endpoints it needs
+      include: []        # empty = all; list tool names here to narrow it down
