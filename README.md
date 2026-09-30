@@ -9,7 +9,7 @@ This is the companion repo to the Empowerment AI two-part video series:
 
 **Live demo:** https://agent-site-kit.vercel.app (Juniper & Rye, a fictional bakery)
 
-![The builder: chat on the left, live preview on the right. The agent is adding a holiday pre-order section it designed itself.](docs/images/builder.png)
+![The builder: chat on the left, live preview on the right. The messages are from a real run, re-displayed for the screenshot: the agent designed the holiday section, caught its own invented "Limited" label, and ran the checks.](docs/images/builder.png)
 
 > **Rather have it done for you?** We build and refresh small-business websites this way,
 > and can set up the agent that maintains yours.
