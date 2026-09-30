@@ -9,6 +9,8 @@ This is the companion repo to the Empowerment AI two-part video series:
 
 **Live demo:** https://agent-site-kit.vercel.app (Juniper & Rye, a fictional bakery)
 
+![The builder: chat on the left, live preview on the right. The agent is adding a holiday pre-order section it designed itself.](docs/images/builder.png)
+
 > **Rather have it done for you?** We build and refresh small-business websites this way,
 > and can set up the agent that maintains yours.
 > [Get a free website analysis at Empowerment AI →](https://empowerment-ai.com/free-analysis?utm_source=github&utm_medium=readme&utm_campaign=agent-site-kit)
@@ -31,6 +33,8 @@ This is the companion repo to the Empowerment AI two-part video series:
 | `agents/hermes/` | How to give a non-technical owner a Hermes agent on Telegram that runs the site. |
 | `docs/` | [How Lovable-style builders actually work](docs/how-lovable-works.md), and [what it all costs](docs/costs.md). |
 | `prompts/` | Copy-paste prompts from the videos, including [moving off WordPress](prompts/migrate-from-wordpress.md). |
+
+![The demo site's home page: Juniper & Rye, a fictional bakery](docs/images/site-home.png)
 
 ## Path 1: build it yourself with Claude Code (technical)
 
