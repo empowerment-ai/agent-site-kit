@@ -122,6 +122,9 @@ hermes skills install https://raw.githubusercontent.com/empowerment-ai/agent-sit
 hermes skills install https://raw.githubusercontent.com/empowerment-ai/agent-site-kit/main/skills/seo-checkup/SKILL.md
 ```
 
+Hermes security-scans each skill before installing it, and all five of these pass. Add `--yes` if
+you're running it from a script.
+
 Or point Hermes at the repo's skills folder, so updates arrive with `git pull`. Add this to
 `~/.hermes/config.yaml`:
 
