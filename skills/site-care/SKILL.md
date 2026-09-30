@@ -19,7 +19,7 @@ publishing; the owner decides what goes live.** Never run `git push`, `git merge
 
 ## Setup check (first time only)
 
-Work inside the site's repository (it contains `CLAUDE.md` and `content/`). If
+Work inside the site's repository (the folder with `content/` and `package.json`). If
 `node_modules` is missing, run `npm install`. The scripts need `GITHUB_TOKEN` in the
 environment (a fine-grained token for this one repository). If it's missing, stop and say
 so. Don't try to work around it.
@@ -29,7 +29,7 @@ so. Don't try to work around it.
 1. **Understand the request.** If anything is ambiguous ("change the hours", but to
    what?), ask one short question. Repeat back what you'll change in one sentence.
 2. **Start fresh:** `git checkout main && git pull` so you're editing the live version.
-3. **Edit the right file**, following `CLAUDE.md`:
+3. **Edit the right file**, following the repository's house rules (loaded automatically):
    - Hours, phone, address, or the announcement bar go in `content/business.json`
    - Menu items and prices go in `content/menu.json`
    - Page wording goes in `content/pages/*.md`
