@@ -60,7 +60,8 @@ ANTHROPIC_API_KEY=sk-ant-... npm start   # http://localhost:4000
 Type "change our Saturday hours to 8 to 1" and watch the preview update. Each request is
 saved as a git commit you can undo. There's a hard spending cap per request
 (`BUILDER_MAX_USD`, default $2). In our tests an hours change cost **$0.15** (19 seconds), and
-adding a designed holiday pre-order section cost **$0.61** (about 2 minutes). See
+adding a designed holiday pre-order section cost about **$0.46** (about 2 minutes). Those are the SDK's
+estimates; your Anthropic Console shows the exact bill. See
 [builder/README.md](builder/README.md).
 
 ### Deploy

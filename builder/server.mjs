@@ -29,7 +29,8 @@ const ALLOWED = [
   "mcp__playwright__browser_navigate", "mcp__playwright__browser_resize", "mcp__playwright__browser_take_screenshot",
 ];
 
-let sessionId = null; // conversation memory: every message resumes the same session
+let sessionId = null;  // conversation memory: every message resumes the same session
+let sessionCost = 0;   // a resumed call reports the whole session's spend, so we subtract
 
 // ---- git checkpoints: Lovable's "version history", for free ----
 const git = (...args) => execFileSync("git", args, { cwd: SITE, encoding: "utf8" }).trim();
@@ -108,12 +109,15 @@ async function runTurn(message, send) {
         }
       } else if (msg.type === "result") {
         sessionId = msg.session_id;
+        const cost = Math.max(0, msg.total_cost_usd - sessionCost); // this request only (an estimate)
+        sessionCost = msg.total_cost_usd;
         const sha = checkpoint(message);
         send({
           type: "done",
           ok: !msg.is_error,
           error: msg.is_error ? (msg.errors?.join(" ") || msg.subtype) : undefined,
-          cost: msg.total_cost_usd,
+          cost,
+          sessionCost,
           seconds: Math.round(msg.duration_ms / 1000),
           checkpoint: sha,
           history: history(),
@@ -136,7 +140,7 @@ const server = http.createServer(async (req, res) => {
     return res.end(fs.readFileSync(path.join(HERE, "index.html"), "utf8").replace("__PREVIEW_URL__", PREVIEW));
   }
   if (req.method === "GET" && req.url === "/api/history") return json(res, 200, history());
-  if (req.method === "POST" && req.url === "/api/new") { sessionId = null; return json(res, 200, { ok: true }); }
+  if (req.method === "POST" && req.url === "/api/new") { sessionId = null; sessionCost = 0; return json(res, 200, { ok: true }); }
   if (req.method === "POST" && req.url === "/api/undo") {
     try {
       const subject = git("log", "-1", "--format=%s");

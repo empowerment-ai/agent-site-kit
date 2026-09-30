@@ -8,7 +8,7 @@ you stop spending is plugin renewals and paying someone for every small change.
 | Item | Cost | Notes |
 |---|---|---|
 | Claude Code | Claude Pro, about $20/mo (includes Claude Code) | Or an Anthropic API key, pay per use |
-| The builder (`builder/`) | Pay-per-use API | Our tests: **$0.15** for an hours change, **$0.61** for a designed new section. Capped per request (`BUILDER_MAX_USD`, default $2) |
+| The builder (`builder/`) | Pay-per-use API | Our tests: **$0.15** for an hours change, about **$0.46** for a designed new section, about **$0.02** to refuse a fake review (SDK estimates). Capped per request (`BUILDER_MAX_USD`, default $2) |
 | DataForSEO (keyword data) | Cents per call | Pay-as-you-go. The `seo-research` skill states the cost before it runs, and there's a free sandbox for practice |
 | Photos | $0 if you have real ones | Real photos of the real business beat AI images |
 

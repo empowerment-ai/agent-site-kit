@@ -127,7 +127,8 @@
           live?.classList.remove("live");
           if (!e.ok) add("err", e.error || "Something went wrong.");
           const bits = [`${e.seconds ?? "?"}s`];
-          if (typeof e.cost === "number") bits.push(`$${e.cost.toFixed(2)}`);
+          if (typeof e.cost === "number") bits.push(`about $${e.cost.toFixed(2)}`);
+          if (typeof e.sessionCost === "number" && e.sessionCost > e.cost) bits.push(`$${e.sessionCost.toFixed(2)} this chat`);
           if (e.checkpoint) bits.push(`checkpoint ${e.checkpoint}`);
           add("meta", bits.join(" · "));
           if (e.history) renderHistory(e.history);
