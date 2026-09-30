@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 import redirectsFile from "./content/redirects.json";
 
 const nextConfig: NextConfig = {
+  // Pin the project root so a stray lockfile in a parent folder can't confuse the build.
+  turbopack: { root: process.cwd() },
   // Old URLs (for example from a WordPress site) -> new pages, as permanent 301s.
   // The list lives in content/redirects.json; `npm run check` fails the build
   // if any destination doesn't exist.
