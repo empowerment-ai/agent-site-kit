@@ -44,6 +44,21 @@ for (const s of menu.sections ?? []) {
   }
 }
 
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+if (menu.holiday?.show) {
+  const h = menu.holiday;
+  if (!h.title) fail(`menu.json holiday section needs a "title".`);
+  for (const key of ["preordersOpen", "pickupStart", "pickupEnd"]) {
+    if (!ISO_DATE.test(h[key] ?? "")) fail(`menu.json holiday "${key}" must be a date like "2026-11-01". Got "${h[key]}".`);
+  }
+  if (h.pickupStart > h.pickupEnd) fail(`menu.json holiday pickup starts ${h.pickupStart} but ends ${h.pickupEnd}. The end must be on or after the start.`);
+  if (!h.items?.length) fail(`menu.json holiday section is showing but has no items. Add items or set "show" to false.`);
+  for (const item of h.items ?? []) {
+    if (!item.name) fail(`Every holiday item in menu.json needs a name.`);
+    if (item.price !== undefined && (typeof item.price !== "number" || item.price <= 0)) fail(`Holiday item "${item.name}" has a price that isn't a number greater than 0. Leave "price" out until it's set.`);
+  }
+}
+
 // ---------- reviews.json: never invent reviews ----------
 const { reviews = [] } = readJSON("reviews.json");
 for (const r of reviews) {

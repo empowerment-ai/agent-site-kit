@@ -46,8 +46,36 @@ export function getBusiness(): Business {
   return readJSON<Business>("business.json");
 }
 
+export type HolidayItem = { name: string; description?: string; price?: number };
+export type Holiday = {
+  show: boolean;
+  title: string;
+  preordersOpen: string;
+  pickupStart: string;
+  pickupEnd: string;
+  items: HolidayItem[];
+};
+
 export function getMenu(): MenuSection[] {
   return readJSON<{ sections: MenuSection[] }>("menu.json").sections;
+}
+
+export function getHoliday(): Holiday | undefined {
+  const holiday = readJSON<{ holiday?: Holiday }>("menu.json").holiday;
+  return holiday?.show ? holiday : undefined;
+}
+
+// "2026-11-01" -> "November 1"
+export function formatMonthDay(iso: string): string {
+  return new Date(`${iso}T12:00:00`).toLocaleDateString("en-US", { month: "long", day: "numeric" });
+}
+
+// "2026-12-20", "2026-12-24" -> "December 20 to 24"
+export function formatDateRange(start: string, end: string): string {
+  const [s, e] = [formatMonthDay(start), formatMonthDay(end)];
+  const [sMonth] = s.split(" ");
+  const [eMonth, eDay] = e.split(" ");
+  return sMonth === eMonth ? `${s} to ${eDay}` : `${s} to ${e}`;
 }
 
 function readMarkdown(dir: string, slug: string): Page {

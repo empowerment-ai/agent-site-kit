@@ -1,5 +1,17 @@
 {
-  "_comment": "The menu. Prices are in dollars. 'daily' items are baked every open day; others list the days they're available.",
+  "_comment": "The menu. Prices are in dollars. 'daily' items are baked every open day; others list the days they're available. 'holiday' is the seasonal pre-order panel: set show to false to hide it. Its items have no prices yet; add a price to an item and it will appear.",
+  "holiday": {
+    "show": true,
+    "title": "Holiday pre-orders",
+    "preordersOpen": "2026-11-01",
+    "pickupStart": "2026-12-20",
+    "pickupEnd": "2026-12-24",
+    "items": [
+      { "name": "Stollen" },
+      { "name": "Panettone" },
+      { "name": "The big rye" }
+    ]
+  },
   "sections": [
     {
       "id": "bread",

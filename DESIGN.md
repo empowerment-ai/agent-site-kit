@@ -49,6 +49,11 @@ Don't put `muted` text on a dark background.
   (outlined) for the secondary one. At most two buttons side by side.
 - **Menu rows:** name, a dotted `.leader`, then the price, with the description underneath
   in `muted`. Prices come from `content/menu.json`.
+- **Seasonal panel:** the menu's holiday pre-order block, from `holiday` in `menu.json`.
+  A `juniper` card with `juniper-ink` text (eyebrows and labels at 85% opacity, never
+  `muted` or `rye`), italic Fraunces for dates and item numbers, and hairlines at
+  `juniper-ink/25`. A price only shows when an item has one. Use this pattern for any
+  seasonal feature. Turn it off with `"show": false`, never by deleting the data.
 - **Hours:** always rendered by `<HoursTable>` from `business.json`, never typed out.
 - **Open now:** `<OpenNow>` computes the status in the business's own time zone.
 

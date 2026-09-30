@@ -12,3 +12,4 @@ builder/node_modules/
 .claude/settings.local.json
 screenshots/
 .impeccable/
+.playwright-mcp/
