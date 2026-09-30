@@ -79,15 +79,17 @@ options).
 
 GitHub → Settings → Developer settings → **Fine-grained tokens** → *Only select
 repositories* → pick the site repo. Permissions: **Contents: Read and write**, **Pull requests:
-Read and write**, **Deployments: Read-only**. Add it to `~/.hermes/.env`:
+Read and write**, **Deployments: Read-only**. Add it to `~/.hermes/.env` as
+**`SITE_GITHUB_TOKEN`**:
 
 ```bash
-GITHUB_TOKEN=github_pat_...
+SITE_GITHUB_TOKEN=github_pat_...
 ```
 
-Hermes hides environment variables from the commands it runs unless they're allowed. The
-`site-care` skill declares `GITHUB_TOKEN`, and [config.example.yaml](config.example.yaml)
-adds it to `terminal.env_passthrough` as a backstop.
+Why not `GITHUB_TOKEN`? Hermes deliberately refuses to pass `GITHUB_TOKEN` and `GH_TOKEN`
+into the commands an agent runs. They're on its credential blocklist, and no setting
+overrides that. The `site-care` skill declares `SITE_GITHUB_TOKEN`, and
+[config.example.yaml](config.example.yaml) adds it to `terminal.env_passthrough`.
 
 Set the agent's git identity to an account that's a member of your Vercel team (Vercel
 only deploys commits from team members on some plans):
@@ -101,7 +103,7 @@ git config --global user.email "<the-github-account>@users.noreply.github.com"
 
 ```bash
 mkdir -p ~/sites && cd ~/sites
-git clone https://x-access-token:${GITHUB_TOKEN}@github.com/<you>/<your-site>.git site
+git clone https://x-access-token:${SITE_GITHUB_TOKEN}@github.com/<you>/<your-site>.git site
 cd site && npm install
 ```
 

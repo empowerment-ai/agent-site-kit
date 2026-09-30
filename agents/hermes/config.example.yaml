@@ -9,8 +9,9 @@ skills:
 terminal:
   # Hermes hides environment variables from commands by default. The site-care
   # scripts need the GitHub token (the site-care skill also declares it).
+  # Use SITE_GITHUB_TOKEN: Hermes always blocks GITHUB_TOKEN/GH_TOKEN from commands.
   env_passthrough:
-    - GITHUB_TOKEN
+    - SITE_GITHUB_TOKEN
 
 approvals:
   mode: smart            # ask in chat before commands Hermes classifies as dangerous

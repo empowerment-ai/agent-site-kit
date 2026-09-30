@@ -2,7 +2,7 @@
 name: site-care
 description: Safely change the live website for a non-technical owner. Edit the content files, open a preview, send the owner the link, and publish only after they say yes. Use for any request to change the live site, like "change our hours", "add a special", "post this photo", "fix the typo on the menu", "undo that", or "what's pending?".
 required_environment_variables:
-  - name: GITHUB_TOKEN
+  - name: SITE_GITHUB_TOKEN
     prompt: Fine-grained GitHub token for the website repository
     help: "GitHub → Settings → Developer settings → Fine-grained tokens. Only this repo. Contents and Pull requests: read/write. Deployments: read."
 ---
@@ -20,9 +20,12 @@ publishing; the owner decides what goes live.** Never run `git push`, `git merge
 ## Setup check (first time only)
 
 Work inside the site's repository (the folder with `content/` and `package.json`). If
-`node_modules` is missing, run `npm install`. The scripts need `GITHUB_TOKEN` in the
-environment (a fine-grained token for this one repository). If it's missing, stop and say
-so. Don't try to work around it.
+`node_modules` is missing, run `npm install`. The `care:*` scripts find the GitHub token
+themselves. Never print, echo, or inspect tokens or `.env` files. If a script says the token
+isn't set up, stop and tell the owner a person needs to fix it. Don't try to work around it.
+
+Use your **file tools** to read and edit files. Use the terminal only for the `git` and
+`npm run` commands in this skill; don't improvise shell or Python one-liners.
 
 ## The loop
 

@@ -20,13 +20,15 @@ export function die(msg) {
   process.exit(1);
 }
 
+// SITE_GITHUB_TOKEN first: Hermes deliberately refuses to pass GITHUB_TOKEN/GH_TOKEN
+// into the commands an agent runs (they're on its credential blocklist).
 export function token() {
-  const t = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+  const t = process.env.SITE_GITHUB_TOKEN || process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
   if (t) return t;
   try {
     return sh("gh auth token");
   } catch {
-    die("No GitHub token. Set GITHUB_TOKEN to a fine-grained token for this repository (Contents: read/write, Pull requests: read/write, Deployments: read).");
+    die("The GitHub token for this site isn't set up (SITE_GITHUB_TOKEN). A person needs to add a fine-grained token for this repository (Contents: read/write, Pull requests: read/write, Deployments: read).");
   }
 }
 
