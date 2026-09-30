@@ -17,9 +17,10 @@ report with "do #2", hand off to the `site-care` skill, which previews and waits
 3. **Redirects still work?** For each entry in `content/redirects.json`, request the old
    URL without following redirects and confirm a 301/308 pointing at the right page.
 4. **Search data (DataForSEO MCP, about 2–4 calls, pennies):**
-   - Keywords the domain currently ranks for (ranked keywords for the site URL in the
-     market from `business.json`), if the site is live on a real domain.
-   - Search volume for the keywords listed in `docs/seo/keywords.md`, if it exists.
+   - Keywords the domain currently ranks for (`dataforseo_labs_google_ranked_keywords` for
+     the site's domain in the market from `business.json`), if it's live on a real domain.
+   - Search volume (`kw_data_google_ads_search_volume`) for the keywords listed in
+     `docs/seo/keywords.md`, if it exists.
    Compare with last month's file in `docs/seo/history/` if there is one, then save this
    month's results as `docs/seo/history/YYYY-MM.md`.
    If the site is new and ranks for nothing yet, say so plainly. That's normal for the

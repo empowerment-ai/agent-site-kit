@@ -2,15 +2,16 @@
   "mcpServers": {
     "dataforseo": {
       "command": "npx",
-      "args": ["-y", "dataforseo-mcp-server@latest"],
+      "args": ["-y", "dataforseo-mcp-server@2.9.13"],
       "env": {
-        "DATAFORSEO_LOGIN": "${DATAFORSEO_LOGIN}",
-        "DATAFORSEO_PASSWORD": "${DATAFORSEO_PASSWORD}"
+        "DATAFORSEO_USERNAME": "${DATAFORSEO_USERNAME}",
+        "DATAFORSEO_PASSWORD": "${DATAFORSEO_PASSWORD}",
+        "ENABLED_MODULES": "KEYWORDS_DATA,DATAFORSEO_LABS"
       }
     },
     "playwright": {
       "command": "npx",
-      "args": ["-y", "@playwright/mcp@latest", "--headless"]
+      "args": ["-y", "@playwright/mcp@0.0.83", "--headless"]
     }
   }
 }

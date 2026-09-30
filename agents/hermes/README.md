@@ -106,7 +106,10 @@ cd site && npm install
 ```
 
 The Vercel project must be connected to the GitHub repo (Vercel → Add New → Project →
-Import). That's what creates a preview link for every pull request.
+Import). That's what creates a preview link for every pull request. By default Vercel puts
+preview links behind a Vercel login (Settings → **Deployment Protection**). Either invite the
+owner to your Vercel team, or turn protection off for previews so the link opens on their
+phone. For a small-business marketing site, the second option is usually fine.
 
 ### 5. Skills and personality
 

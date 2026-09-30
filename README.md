@@ -48,7 +48,7 @@ Useful things to ask Claude Code in this repo:
 
 - `/site-brief`: interviews you and fills in `content/` with your real business facts.
 - `/build-page make the home page feel more premium`: builds the page, then screenshots it at phone and desktop width and critiques its own work.
-- `/seo-research`: pulls real search volumes from DataForSEO and maps keywords to pages. It needs `DATAFORSEO_LOGIN` and `DATAFORSEO_PASSWORD` in your environment, and the skill tells you the cost before it spends anything.
+- `/seo-research`: pulls real search volumes from DataForSEO and maps keywords to pages. It needs `DATAFORSEO_USERNAME` and `DATAFORSEO_PASSWORD` in your environment, and the skill tells you the cost before it spends anything.
 
 ### The Lovable-style builder
 

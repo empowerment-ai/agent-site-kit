@@ -21,10 +21,18 @@ approvals:
 mcp_servers:
   dataforseo:
     command: npx
-    args: ["-y", "dataforseo-mcp-server@latest"]
+    # Pinned on purpose: this process runs with your DataForSEO credentials, so don't
+    # let it auto-update. Bump the version deliberately after reading the changelog.
+    args: ["-y", "dataforseo-mcp-server@2.9.13"]
     env:
-      DATAFORSEO_LOGIN: "your-dataforseo-login"
+      DATAFORSEO_USERNAME: "your-dataforseo-login"
       DATAFORSEO_PASSWORD: "your-dataforseo-api-password"
+      ENABLED_MODULES: "KEYWORDS_DATA,DATAFORSEO_LABS"   # keyword research only
     tools:
-      # Keep the agent to the read-only research endpoints it needs
-      include: []        # empty = all; list tool names here to narrow it down
+      # Only these four read-only research tools are visible to the agent.
+      # (An empty include list would expose every tool the server offers.)
+      include:
+        - dataforseo_labs_google_keyword_ideas
+        - dataforseo_labs_google_keyword_suggestions
+        - kw_data_google_ads_search_volume
+        - dataforseo_labs_google_ranked_keywords

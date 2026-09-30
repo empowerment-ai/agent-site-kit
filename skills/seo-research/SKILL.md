@@ -16,16 +16,19 @@ DataForSEO bills per API call; the calls in this skill cost cents each. Before r
    suggestions and search-volume lookups are typically a few cents per call; check
    https://dataforseo.com/pricing for current rates.
 2. Keep it to **5 calls or fewer** per run unless the owner says otherwise.
-3. For practice runs, use DataForSEO's free sandbox (`https://sandbox.dataforseo.com`,
-   same login, returns sample data at no cost) and label the results as sample data.
+3. The MCP server always calls the live API (there's no sandbox switch), so for a
+   practice run keep it to one or two calls. That's cents. Check the account balance in
+   the DataForSEO dashboard if the owner wants to see it.
 
 ## Steps
 
 1. Read `content/business.json`: the `seo.market` (e.g. `"Virginia,United States"`),
    `seo.language`, and `seo.seedKeywords`, plus what the business sells.
-2. Using the DataForSEO MCP tools:
-   - Get **keyword ideas/suggestions** for 2–3 seed keywords in the market's location.
-   - Get **search volume** for the most relevant 20–40 candidates.
+2. Using the DataForSEO MCP tools (the repo's `.mcp.json` enables only the keyword-research
+   modules):
+   - `dataforseo_labs_google_keyword_ideas` or `dataforseo_labs_google_keyword_suggestions`
+     for 2–3 seed keywords in the market's location.
+   - `kw_data_google_ads_search_volume` for the most relevant 20–40 candidates.
 3. Filter hard. Keep searches a real customer of *this* business would type, with local
    or purchase intent. Drop national brands, jobs ("bakery jobs"), and recipes, unless
    the owner wants recipe content.
